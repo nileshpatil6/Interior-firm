@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prasanhom Interiors AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+            :root {
+        --primary-color: #FFFFFF;
+        --secondary-color: #D8C199;
+        --background-color: #1B2933;
+        --text-color: #FFFFFF;
+        --glass-bg: #28434F;
+        --glass-border: 2px solid #D8C199;
+
+    }
+
+    body {
+        font-family: 'Arial', sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 0vh;
+        margin-top: -3px;
+        
+        
+        background-color: black;
+        color: var(--text-color);
+    }
+
+    .container {
+        background: var(--glass-bg);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 3vw;
+        margin-top: -2vh;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        
+        width: 96%;
+        max-width: 700px;
+        position: relative;
+    }
+
+    h1 {
+        
+      /*  color: var(--primary-color);*/
+        font-size: 2em;
+        
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    button {
+        background: var(--secondary-color);
+        color:   #324B5C;
+        border: none;
+        padding: 12px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2em;
+       
+        transition: all 0.3s ease;
+        box-shadow: var(--neuro-shadow);
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button:hover {
+        background: #FFBB63;
+        transform: translateY(-2px);
+    }
+
+    #chatBody {
+        margin-top: 0px;
+        border: var(--glass-border);
+        padding: 20px;
+        height: 67vh;
+        
+        overflow-y: auto;
+        background: var(--glass-bg);
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: inset var(--neuro-shadow);
+    }
+
+    .user-message, .bot-message {
+        max-width: 80%;
+        padding: 12px 16px;
+        margin-bottom: 10px;
+        border-radius: 20px;
+        box-shadow: var(--neuro-shadow);
+        animation: pop 0.3s ease-in-out;
+    }
+
+    .user-message {
+        align-self: flex-end;
+        background: linear-gradient(135deg, #FFE6C6, #E6B87D);
+        color: #28434F;
+    }
+
+   .bot-message {
+            align-self: flex-start;
+  background: #fc4a1a; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(135deg, #FFE6C6, #E6B87D);
+  color: #28434F;
+  border-radius: 20px;
+  max-width: 90%;
+  padding: 20px;
+  margin-bottom: 10px; /* Updated margin-bottom */
+  animation: pop 0.3s ease-in-out;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  
+  overflow-wrap: break-word;
+  font-size: 17px;
+        }
+  @keyframes pop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+    @keyframes pop {
+        0% { transform: scale(0); opacity: 0; }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    .typing-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        margin-top: 10px;
+    }
+
+    .typing-indicator div {
+        width: 10px;
+        height: 10px;
+        background-color: var(--secondary-color);
+        border-radius: 50%;
+        margin: 0 3px;
+        animation: typing 1s infinite;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% { transform: translateY(0); }
+        30% { transform: translateY(-10px); }
+    }
+
+    .input-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+        
+    }
+
+    #messageInput {
+        flex-grow: 1;
+        padding: 12px;
+        width:12px;
+        border-radius: 25px;
+        border: var(--glass-border);
+        background: var(--glass-bg);
+        font-size: 16px;
+        color: var(--text-color);
+        box-shadow: inset var(--neuro-shadow);
+    }
+
+    .wave-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+        margin-top: 20px;
+    }
+
+.wave {
+    width: 8px;
+    height: 3vh;
+    background: var(--secondary-color);
+    margin: 0 3px;
+    border-radius: 10px;
+    animation: wave 1.5s infinite ease-in-out;
+}
+
+@keyframes wave {
+    0%, 100% { transform: scaleY(1); }
+    25% { transform: scaleY(1.5); }
+    50% { transform: scaleY(2.2); }
+    75% { transform: scaleY(0.8); }
+}
+
+/* Random delays and durations for each wave */
+.wave:nth-child(1) {
+    animation-delay: 0.12s;
+    animation-duration: 1.4s;
+}
+.wave:nth-child(2) {
+    animation-delay: 0.25s;
+    animation-duration: 1.7s;
+}
+.wave:nth-child(3) {
+    animation-delay: 0.05s;
+    animation-duration: 1.2s;
+}
+.wave:nth-child(4) {
+    animation-delay: 0.15s;
+    animation-duration: 1.8s;
+}
+.wave:nth-child(5) {
+    animation-delay: 0.3s;
+    animation-duration: 1.3s;
+}
+.wave:nth-child(6) {
+    animation-delay: 0.1s;
+    animation-duration: 2s;
+}
+.wave:nth-child(7) {
+    animation-delay: 0.22s;
+    animation-duration: 1.5s;
+}
+.wave:nth-child(8) {
+    animation-delay: 0.35s;
+    animation-duration: 1.6s;
+}
+.wave:nth-child(9) {
+    animation-delay: 0.18s;
+    animation-duration: 1.9s;
+}
+.wave:nth-child(10) {
+    animation-delay: 0.08s;
+    animation-duration: 1.3s;
+}
+
+    #recordingIndicator {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        border-radius: 50%;
+        display: none;
+        animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); }
+        100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); }
+    }
+
+    #startSpeechRecognition {
+        position: relative;
+    }
+
+    #startSpeechRecognition.listening {
+        background-color: #FFFFFF00;
+    }
+
+    #startSpeechRecognition.listening i {
+        display: none;
+    }
+
+    #startSpeechRecognition.listening::after {
+        content: '';
+        position: absolute;
+        top: 40%;
+        left: 40%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        background-color: white;
+        border-radius: 50%;
+        animation: pulse 1s infinite;
+    }
+
+    #startSpeechRecognition {
+        position: relative;
+    }
+
+    #startSpeechRecognition.listening {
+        background-color: #FF0000;
+    }
+
+    #startSpeechRecognition.listening i {
+        display: none;
+    }
+
+    #startSpeechRecognition.listening::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        background-color: white;
+        border-radius: 50%;
+        animation: pulse 1s infinite;
+    }
+
+    .welcome-message {
+        text-align: center;
+        margin-bottom: 6px;
+        font-size: 1.42em;
+        color: var(--primary-color);
+    }
+
+.food-image-container {
+    display: flex;
+    justify-content: space-between;
+    
+    height: 400px; /* Set a fixed height */
+    width: 100%; /* Adjust width to make sure images fit within the container */
+    overflow: hidden;
+}
+
+.food-image {
+    width: 45%; /* Adjust width to make space for two images, keeping them side by side */
+    height: 90%; /* Set height to fill the container */
+    
+    object-fit: cover;
+    border-radius: 10px;
+    filter: drop-shadow(0px 0px 10px rgba(0, 0, 0, 0.3)); /* Shadow effect */
+    transition: all 0.5s ease;
+    animation: pop 2s;
+}
+    @keyframes cook {
+        0% { filter: brightness(100%) saturate(100%); }
+        50% { filter: brightness(120%) saturate(120%); }
+        100% { filter: brightness(100%) saturate(100%); }
+    }
+
+    .cooking .food-image {
+        animation: cook 2s infinite;
+    }
+
+    .feature-list {
+        list-style-type: none;
+        padding: 0;
+        margin: 20px 0;
+    }
+
+    .feature-list li {
+        margin-bottom: 15px;
+        padding-left: 35px;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .feature-list li i {
+        position: absolute;
+        left: 0;
+        color: var(--secondary-color);
+        font-size: 1.2em;
+        width: 25px;
+        text-align: center;
+    }
+
+    .start-prompt {
+        text-align: center;
+        margin-top: 20px;
+        font-style: italic;
+        color: var(--text-color);
+       
+    }
+    </style>
+</head>
+<div class="container">
+      <h1 style="color: #D8C199; font-family: 'Montserrat', sans-serif; text-align: center;">Prasanhom Interior AI</h1>
+      <div id="chatBody">
+        <div id="welcomeMessage" class="welcome-message">
+          Your personal interior design assistant.
+        </div>
+        <div id="foodImages" class="food-image-container">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOIRkvhtubt-NLUWImU-0CCdZT5EhB2BAmurldhu0htlq9esGuColyNFWc&s=10" alt="Modern Living Room" class="food-image">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhe7rITJ02HsNl48UoLwoGr08OfZpedau0K3Sf19gup313jIWrh_RkEcip&s=10" alt="Stylish Bedroom" class="food-image">
+
+        </div>
+        <ul id="featureList" class="feature-list">
+          <li><i class="fas fa-palette"></i> Explore design inspirations and color schemes</li>
+          <li><i class="fas fa-lightbulb"></i> Get personalized decor recommendations</li>
+          <li><i class="fas fa-camera"></i> Upload room images for custom suggestions</li>
+          <li><i class="fas fa-ruler-combined"></i> Visualize furniture placements and layouts</li>
+        </ul>
+        <div id="startPrompt" class="start-prompt">
+          Start by asking for decor ideas or uploading a photo of your room!
+        </div>
+      </div>
+      <div class="input-container" >
+        <input ="text" id="messageInput" placeholder="Type your message here..." >
+        <button id="sendMessage"><i class="fas fa-paper-plane"></i></button>
+        <button id="startSpeechRecognition"><i class="fas fa-microphone"></i></button>
+        <button>
+        <label for="imageUpload" style="cursor: pointer;">
+          <i class="fas fa-image" style="font-size: 24px;"></i>
+        </label>
+         </button>
+<input type="file" id="imageUpload" accept="image/*,video/*" capture="environment" style="display: none;">
+
+
+      </div>
+    </div>
+
+    <script type="module">
+        import { GoogleGenerativeAI } from "https://esm.run/@google/generative-ai";
+
+        const API_KEY = "AIzaSyBt51NsF__qc1cNj_j3-dm1s4oc9RX6NMU"; // Replace with your actual API key
+        const genAI = new GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+
+        const chatBody = document.getElementById('chatBody');
+        const startSpeechRecognitionButton = document.getElementById('startSpeechRecognition');
+        const sendMessageButton = document.getElementById('sendMessage');
+        const messageInput = document.getElementById('messageInput');
+        const imageUpload = document.getElementById('imageUpload');
+        let recognition;
+        let isListening = false;
+        let finalTranscript = '';
+        let audioContext;
+        let audioSource;
+        let audioBuffer;
+        let secondAudioBuffer;
+        let thirdAudioBuffer;
+        let conversationHistory = [
+          {
+            "role": "user",
+            "parts": [{ "text": "hello" }]
+            },
+          {
+            "role": "model",
+            "parts": [{ "text": "hello! welcome to prasanhom interiors. i'm here to help you with any interior design needs. may i know your name?" }]
+            },
+            {
+              "role": "user",
+              "parts": [{ "text": "Who is your owner?" }]
+            },
+            {
+              "role": "model",
+              "parts": [{
+                "text": "Our owner is Sanjay R Melagade. You can contact us at 9008209064, email us at prasanhominteriors@gmail.com, or visit our website at prasanhominteriors.com for more information. We’re located at 13th A Cross, Yelahanka New Town, Bangalore, 560064."
+                    }]
+            },
+          {
+            "role": "user",
+            "parts": [{ "text": "i'm looking for some decor ideas for my living room." }]
+            },
+          {
+            "role": "model",
+            "parts": [
+              {
+                "text": `
+                            from now, you're the virtual assistant of Prasanhom Interiors, an interior design firm. your role is to provide personalized decor and furnishing recommendations based on the user's style preferences and room characteristics. your name is Prasanhom Bot. act friendly and conversational, creating a warm experience for each user. greet each user by name when possible, and use a humble and helpful tone.
+                            
+                            ### general chat style:
+                            - use lowercase text for responses, except when beginning sentences or using proper nouns.
+                            - add conversational elements like "hmm," "oh," and "wow" to make interactions more friendly and human-like.
+                            - use punctuation like commas, ellipses (...), and exclamation marks (!) to keep conversations natural.
+                            - address the user by name frequently to create a personalized experience.
+                            
+                            ### steps and functionality:
+                            ---
+                            
+                            #### 1. initial greeting:
+                            - welcome the user warmly.
+                            - ask for their name and confirm if they’d like assistance with interior design, product selection, or decor recommendations.
+                            
+                            **example greeting:**
+                            > hello! welcome to prasanhom interiors. i'm here to help you with any interior design needs. may i know your name?
+                            
+                            ---
+                            
+                            #### 2. room analysis (when user uploads a room image):
+                            - if a user uploads an image, analyze key characteristics like color scheme, lighting, furniture style, and overall ambiance.
+                            - based on these features, suggest an appropriate decor item, furniture piece, or design improvement.
+                            - always suggest one item at a time, using the following format to showcase the item name and display an image alongside it:
+                            
+                            **suggestion format:**
+                            \`\`\`html
+                            <h1>$itemName</h1>
+                            <img src="$itemImage" alt="$itemName" style="max-width: 100%; height: auto;">
+                            \`\`\`
+                            
+                            - mention how the item would complement the existing elements in their space, suggesting color matches, style enhancements, or functional improvements.
+                            
+                            **example response:**
+                            > hmm, i see that your room has a light, airy vibe with soft whites and grays. <h1>minimalist white side table</h1> <img src="assets/table1.png" alt="minimalist white side table" style="max-width: 100%; height: auto;"> could really fit in beautifully here. would you like more details?
+                            
+                            ---
+                            
+                            #### 3. interior design item catalog (for suggestions based on user requests):
+                            
+                            provide decor and furniture recommendations from Prasanhom Interiors’ catalog. below are sample items:
+                            
+                            \`\`\`javascript
+                            const decorItems = [
+                              { name: 'minimalist white side table', price: '₹2,499', img: 'assets/table1.png' },
+                              { name: 'vintage floor lamp', price: '₹1,999', img: 'assets/lamp1.png' },
+                              { name: 'scandinavian style sofa', price: '₹12,499', img: 'assets/sofa1.png' },
+                              { name: 'rustic bookshelf', price: '₹5,999', img: 'a.png' },
+                              { name: 'modern wall art set', price: '₹999', img: 'assets/wallart1.png' },
+                              { name: 'bohemian rug', price: '₹3,499', img: 'assets/rug1.png' },
+                              { name: 'contemporary coffee table', price: '₹4,999', img: 'assets/coffee_table.png' },
+                            ];
+                            \`\`\`
+                            
+                            **guidelines for suggesting items:**
+                            - only suggest one item per response. tailor each suggestion to fit the user’s described style or room.
+                            - if the user requests an item not in stock, let them know politely that it isn’t available, and offer an alternative suggestion if relevant.
+                            
+                            **example suggestion:**
+                            > oh, i have a beautiful suggestion for you. <h1>scandinavian style sofa</h1> <img src="assets/sofa1.png" alt="scandinavian style sofa"> - its clean lines and muted tones would fit so well in your living space. should i add this to your list?
+                            
+                            ---
+                            
+                            #### things to remember:
+                            - be polite and respectful in each message.
+                            - offer personalized, style-matching suggestions that enhance the user’s space.
+                            - include an image of each suggested item to make the experience more engaging and informative.
+                        `
+                    }
+                ]
+            }
+        ];
+
+        async function startSpeechRecognition() {
+            if (audioSource) {
+                audioSource.stop();
+            }
+
+            isListening = true;
+            recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = false;
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                finalTranscript = transcript;
+                console.log('Final transcript:', finalTranscript);
+            };
+
+            recognition.onend = () => {
+                isListening = false;
+                if (finalTranscript.trim() !== '') {
+                    addUserMessage(finalTranscript.trim());
+                    processBotResponse(finalTranscript.trim());
+                    finalTranscript = '';
+                }
+            };
+
+            recognition.start();
+        }
+
+        function addUserMessage(message) {
+            document.getElementById('welcomeMessage').style.display = 'none';
+            document.getElementById('foodImages').style.display = 'none';
+            document.getElementById('featureList').style.display = 'none';
+            document.getElementById('startPrompt').style.display = 'none';
+
+            conversationHistory.push({ role: 'user', parts: [{ text: message }] });
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'user-message');
+            messageElement.textContent = message;
+            chatBody.appendChild(messageElement);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function addBotMessage({ name, price, img }) {
+            conversationHistory.push({ role: 'model', parts: [{ text: name }] });
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'bot-message');
+            const formattedName = name.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            
+            const content = `
+                <span>${formattedName}</span><br>
+                <img src="${img}" alt="${name}" style="max-width: 70%; display: block; margin: 10px auto;"><br>
+                Price: ${price}
+            `;
+            messageElement.innerHTML = content;
+            chatBody.appendChild(messageElement);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            speakBotResponse(name);
+        }
+
+        function addBotMessagep({ name }) {
+            conversationHistory.push({ role: 'model', parts: [{ text: name }] });
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'bot-message');
+            
+            const formattedName = name.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            
+            const content = `
+                <span>${formattedName}</span><br>
+            `;
+            messageElement.innerHTML = content;
+            chatBody.appendChild(messageElement);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            speakBotResponse(name);
+        }
+
+        async function processBotResponse(message, imageData = null) {
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+            chatBody.appendChild(typingIndicator);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            try {
+                typingIndicator.style.display = 'flex';
+
+                let content = [{ text: message }];
+                if (imageData) {
+                    content.push(imageData);
+                }
+
+                console.log('Sending message to Gemini API:', content);
+                console.log('Conversation history:', conversationHistory);
+
+                const chat = model.startChat({
+                    history: conversationHistory,
+                    generationConfig: {
+                        maxOutputTokens: 1000,
+                        temperature: 0.9,
+                        topP: 1,
+                        topK: 1,
+                    },
+                });
+
+                const result = await chat.sendMessage(content);
+                console.log('Gemini API response:', result);
+
+                const botMessage = result.response.text();
+
+                typingIndicator.style.display = 'none';
+
+                function splitBotMessage(message) {
+                    const codeRegex = /```([\s\S]*?)```/;
+                    const match = message.match(codeRegex);
+
+                    if (match) {
+                        const plainText = message.replace(codeRegex, '').trim();
+                        const codeText = match[1].trim();
+                        return { plainText, codeText };
+                    } else {
+                        return { plainText: message, codeText: '' };
+                    }
+                }
+
+                const { plainText, codeText } = splitBotMessage(botMessage);
+
+                const dishes = [
+  { name: 'minimalist white side table', price: '₹2,499', img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTVz1yHLK3AxgA3pGBOHiXFHen3eqmCwaF70DA6I1txpEi5ERBuJ9v8PuD6WU5qAbF0mlzgOmAq41KWcFtcCYgvWxpYy260X-7_oQnmipUh&usqp=CAE' },
+  { name: 'vintage floor lamp', price: '₹1,999', img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS7MX6dgmGRGP2JlqdKSzis-hwA_fodI41-xmvXtxjTeke5jrbe3zBqWgMAQ8N-Zhr_QMADLLmxHEX_t4s0L9WyvB1NDPg352v0BrjID2EP&usqp=CAE' },
+  { name: 'scandinavian style sofa', price: '₹12,499', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9jLn9iUtzZnsvZFpLM-zA17lNzWgJIZzdpGFHxvCis9FrCZg2aeg9Yjw&s=10' },
+  { name: 'rustic bookshelf', price: '₹5,999', img: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpAoZhNVfQwjEGv-FA_9PKLXp6Ftd0yCgvJdTdzL6UW4t1SDMfod6U3DMJD5FEdEF5Rsgvc-ygZl7kYXnp9Aue3VJTosxEHZToxqlm1Yo&usqp=CAE' },
+  { name: 'modern wall art set', price: '₹999', img: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSZ9yRUG97orSDV3teMwNAnPnGhM1OUiIDLEBbCAdxynqgogxr2VXGLltNjgvKs_BsMt9rvs4n9beRqr0Ef1bh0IzIMTHi8e7TC9NRkI_MJsGFP-VJ6d92TFw&usqp=CAE' },
+  { name: 'bohemian rug', price: '₹3,499', img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRyeA7g34NwtKhcoeP4jT21RP2Ueolozk6k9rG1J6Lvjp6dRuhGpwVFk8xbeupoyHfV4MhbPWBOKFStNSbwocKS5WdaLdXoj6X1ygrJjnY&usqp=CAE' },
+  { name: 'contemporary coffee table', price: '₹4,999', img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQyUYf015mPuYIaBTRZYxN6t5vxpWPMjw9EE70PfPu0Nna7em04kKFz0_oj4biUPwjI1Jeoc4vvsHAX98RyolcHL0YzJ-j1F-zVDoS5Bv6U&usqp=CAE' },
+];
+                const dish = dishes.find(d => plainText.toLowerCase().includes(d.name.toLowerCase()));
+
+                if (dish) {
+                    const combinedMessage = { ...dish, name: plainText + '\n\n' + dish.name };
+                    addBotMessagep({ name: plainText });
+                    
+                    console.log('Final transcript:');
+                } else {
+                    addBotMessagep({ name: plainText });
+                    console.log('Final hii:');
+                }
+
+                if (codeText) {
+                    const htmlRegex = /<\/?[a-z][\s\S]*>/i;
+                    if (htmlRegex.test(codeText)) {
+                        displayCodeMessage(codeText);
+                    }
+                }
+            } catch (error) {
+                console.error('Error calling Gemini API', error);
+                console.error('Error details:', error.message);
+                addBotMessagep({ name: 'Sorry, something went wrong. Please try again.' });
+            }
+        }
+
+        function displayCodeMessage(code) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'bot-message');
+            messageElement.innerHTML = `<span><code>${code}</code></span>`;
+            chatBody.appendChild(messageElement);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function removeWaveAnimation() {
+            const waveContainer = document.querySelector('.wave-container');
+            if (waveContainer) {
+                waveContainer.remove();
+            }
+        }
+
+        function addWaveAnimation() {
+            const waves = document.createElement('div');
+            waves.className = 'wave-container';
+            waves.innerHTML = '<div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div><div class="wave"></div>';
+            chatBody.appendChild(waves);
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        async function speakBotResponse(message) {
+            if (audioSource) {
+                audioSource.stop();
+            }
+            audioBuffer = null;
+            secondAudioBuffer = null;
+            thirdAudioBuffer = null;
+
+            const url = "https://api.deepgram.com/v1/speak?model=aura-orpheus-en";
+            const apiKey = "b8b1401237d2eb28d132caf61ef487cd52e0eb78"; // Replace with your actual Deepgram API key
+            const headers = {
+                Authorization: `Token ${apiKey}`,
+                "Content-Type": "application/json"
+            };
+
+            const words = message.split(' ');
+            const initialChunk = words.slice(0, 15).join(' ');
+            const secondChunk = words.slice(15, 160).join(' ');
+            const thirdChunk = words.slice(160).join(' ');
+
+            const initialBody = JSON.stringify({ text: initialChunk });
+            const secondBody = JSON.stringify({ text: secondChunk });
+            const thirdBody = JSON.stringify({ text: thirdChunk });
+
+            const initialOptions = {
+                method: "POST",
+                headers: headers,
+                body: initialBody
+            };
+
+            const secondOptions = {
+                method: "POST",
+                headers: headers,
+                body: secondBody
+            };
+
+            const thirdOptions = {
+                method: "POST",
+                headers: headers,
+                body: thirdBody
+            };
+
+            try {
+                const initialResponse = await fetch(url, initialOptions);
+                if (!initialResponse.ok) {
+                    throw new Error(`Failed to make initial request: ${initialResponse.statusText}`);
+                }
+                const initialBuffer = await initialResponse.arrayBuffer();
+                addWaveAnimation();
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                audioBuffer = await audioContext.decodeAudioData(initialBuffer);
+                playAudioBuffer(audioBuffer, 1);
+
+                if (secondChunk) {
+                    const secondResponse = await fetch(url, secondOptions);
+                    if (!secondResponse.ok) {
+                        throw new Error(`Failed to make second request: ${secondResponse.statusText}`);
+                    }
+                    const secondBuffer = await secondResponse.arrayBuffer();
+                    secondAudioBuffer = await audioContext.decodeAudioData(secondBuffer);
+                }
+
+                if (thirdChunk) {
+                    const thirdResponse = await fetch(url, thirdOptions);
+                    if (!thirdResponse.ok) {
+                        throw new Error(`Failed to make third request: ${thirdResponse.statusText}`);
+                    }
+                    const thirdBuffer = await thirdResponse.arrayBuffer();
+                    thirdAudioBuffer = await audioContext.decodeAudioData(thirdBuffer);
+                }
+            } catch (error) {
+                console.error("Error in fetching or decoding audio data:", error);
+                console.error("Error details:", error.message);
+            }
+        }
+                
+        function playAudioBuffer(buffer, bufferNumber) {
+            audioSource = audioContext.createBufferSource();
+            audioSource.buffer = buffer;
+            audioSource.connect(audioContext.destination);
+            audioSource.start();
+        
+            audioSource.onended = () => {
+                if (bufferNumber === 1 && secondAudioBuffer) {
+                    playAudioBuffer(secondAudioBuffer, 2);
+                } else if (bufferNumber === 2 && thirdAudioBuffer) {
+                    playAudioBuffer(thirdAudioBuffer, 3);
+                } else {
+                    removeWaveAnimation();
+                    startSpeechRecognition();
+                }
+            };
+        }
+        
+        startSpeechRecognitionButton.addEventListener('click', () => {
+            if (!isListening) {
+                startSpeechRecognition();
+            }
+        });
+        
+        sendMessageButton.addEventListener('click', () => {
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                addUserMessage(message);
+                processBotResponse(message);
+                messageInput.value = '';
+            }
+        });
+        
+        window.addEventListener('click', () => {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }, { once: true });
+        
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const message = messageInput.value.trim();
+                if (message !== '') {
+                    addUserMessage(message);
+                    processBotResponse(message);
+                    messageInput.value = '';
+                }
+            }
+        });
+
+        async function fileToGenerativePart(file) {
+            const base64EncodedDataPromise = new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                reader.readAsDataURL(file);
+            });
+            return {
+                inlineData: { data: await base64EncodedDataPromise, mimeType: file.type },
+            };
+        }
+
+        imageUpload.addEventListener('change', async (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const imageData = await fileToGenerativePart(file);
+                addUserMessage("Image uploaded");
+                processBotResponse(`
+   ### Room Analysis (when user uploads a room image):
+   
+   - If a user uploads an image, analyze key characteristics such as color scheme, lighting, furniture style, and overall ambiance.
+   - Based on these features, suggest an appropriate decor item, furniture piece, or design improvement.
+   - Always suggest one item at a time, using the following format to showcase the item name and display an image alongside it:
+   
+   **Suggestion Format:**
+   \`\`\`html
+   <h1>$itemName</h1>
+   <img src="$itemImage" alt="$itemName" style="max-width: 100%; height: auto;">
+   \`\`\`
+   
+   - Mention how the item would complement the existing elements in their space, suggesting color matches, style enhancements, or functional improvements.
+   
+   **Example Response:**
+   > Hmm, I see that your room has a light, airy vibe with soft whites and grays.
+   <h1>Minimalist White Side Table</h1>
+   <img src="assets/table1.png" alt="minimalist white side table" style="max-width: 100%; height: auto;">
+   could really fit in beautifully here. Would you like more details?
+   `, imageData);         }
+        });
+    </script>
+</body>
+</html>
