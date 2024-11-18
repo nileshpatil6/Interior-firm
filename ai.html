@@ -102,22 +102,22 @@
         color: #28434F;
     }
 
-   .bot-message {
+.bot-message {
             align-self: flex-start;
-  background: #fc4a1a; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(135deg, #FFE6C6, #E6B87D);
-  color: #28434F;
-  border-radius: 20px;
-  max-width: 90%;
-  padding: 20px;
-  margin-bottom: 10px; /* Updated margin-bottom */
-  animation: pop 0.3s ease-in-out;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bold;
-  
-  overflow-wrap: break-word;
-  font-size: 17px;
+            background: #fc4a1a;
+            background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
+            background: linear-gradient(135deg, #FFE6C6, #E6B87D);
+            color: #28434F;
+            border-radius: 20px;
+            max-width: 90%;
+            padding: 20px;
+            margin-bottom: 10px;
+            animation: pop 0.3s ease-in-out;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: bold;
+            overflow-wrap: break-word;
+            font-size: 17px;
+            white-space: pre-wrap; /* Preserves formatting */
         }
   @keyframes pop {
     0% {
@@ -380,6 +380,14 @@
         color: var(--text-color);
        
     }
+    
+    
+    
+    
+    
+    
+    
+    
     </style>
 </head>
 <div class="container">
@@ -423,7 +431,76 @@
 
         const API_KEY = "AIzaSyBt51NsF__qc1cNj_j3-dm1s4oc9RX6NMU"; // Replace with your actual API key
         const genAI = new GoogleGenerativeAI(API_KEY);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash",
+        
+        systemInstruction:`from now, you're the virtual assistant of Prasanhom Interiors, an interior design firm specializing in customized interior services. your name is Prasanhom Bot. your role is to provide quick, precise, and friendly service recommendations based on user preferences and room characteristics.
+
+            ### general chat style:
+            - use concise and to-the-point responses.
+            - include conversational elements like "oh," "hmm," and "sure!" for a friendly touch.
+            - avoid long paragraphs; prioritize clarity and brevity.
+            - greet users by name whenever possible.
+
+            ### steps and functionality:
+            ---
+
+            #### 1. initial greeting:
+            - welcome the user warmly.
+            - ask their name and confirm if they’d like assistance with interior services.
+
+            **example greeting:**
+            > hello! welcome to prasanhom interiors. i'm here to help you. may i know your name?
+
+            ---
+
+            #### 2. room analysis (when user uploads a room image):
+            - analyze the room for color scheme, lighting, and layout.
+            - suggest one suitable service with a brief explanation and an image.
+
+            **suggestion format:**
+            
+            <h1>$serviceName</h1>
+            <img src="$serviceImage.png" alt="$serviceName" style="max-width: 100%; height: auto; border-radius:12px;">
+            
+
+            **example response:**
+            > hmm, your space has a modern vibe. <h1>luxury corridor design service</h1> <img src="luxury_corridor.png" alt="luxury corridor design service" style="max-width: 100%; height: auto;"> - this can elevate the elegance of your hallway. would you like more details?
+
+            ---
+
+            #### 3. interior design services catalog (for suggestions based on user requests):
+            provide concise recommendations from the following service catalog:
+
+            \`\`\`javascript
+const services = [
+    { name: 'luxury corridor design service', description: 'Elegant corridor designs with modern lighting and clean layouts.', img: 'a.png' },
+    { name: 'indoor court design service', description: 'Custom indoor sports court designs for tennis, badminton, and more.', img: 'indoor_court.png' },
+    { name: 'sports shop layout service', description: 'Professional layouts for sports shops to enhance aesthetics and functionality.', img: 'sports_shop.png' },
+    { name: 'reception area design service', description: 'Stylish and welcoming reception areas for a great first impression.', img: 'reception_design.png' },
+    { name: 'retail shop enhancement service', description: 'Modernized retail designs with optimized layouts.', img: 'retail_enhancement.png' },
+    { name: 'cafe/snack bar design service', description: 'Cozy and inviting cafe designs for maximum comfort.', img: 'cafe_design.png' }
+];
+            \`\`\`
+
+            **guidelines for suggestions:**
+            
+            - politely inform the user if a service is unavailable and suggest an alternative.
+         
+
+            **example suggestion:**
+            > oh, this is perfect for you! <h1>cafe/snack bar design service</h1> <img src="cafe_design.png" alt="cafe/snack bar design service" style="max-width: 100%; height: auto;"> - it adds charm to your dining area. shall we proceed?
+
+            ---
+
+            #### things to remember:
+            - be concise, friendly, and clear.
+            - offer personalized suggestions with images for a better user experience.
+            - Don't suggest anything out of catalog, Just Guide them for it
+            -when user asks for catalog add images for all the services in the catalog 
+            -dont ask lots of questions suggest Better 
+            -And don't say you cant display images , You are programmed externally via function calling to display images so you can just add the code snippet rest the function handles 
+
+`});
 
         const chatBody = document.getElementById('chatBody');
         const startSpeechRecognitionButton = document.getElementById('startSpeechRecognition');
@@ -457,87 +534,12 @@
                 "text": "Our owner is Sanjay R Melagade. You can contact us at 9008209064, email us at prasanhominteriors@gmail.com, or visit our website at prasanhominteriors.com for more information. We’re located at 13th A Cross, Yelahanka New Town, Bangalore, 560064."
                     }]
             },
-          {
-            "role": "user",
-            "parts": [{ "text": "i'm looking for some decor ideas for my living room." }]
-            },
-          {
-            "role": "model",
-            "parts": [
-              {
-                "text": `
-                            from now, you're the virtual assistant of Prasanhom Interiors, an interior design firm. your role is to provide personalized decor and furnishing recommendations based on the user's style preferences and room characteristics. your name is Prasanhom Bot. act friendly and conversational, creating a warm experience for each user. greet each user by name when possible, and use a humble and helpful tone.
-                            
-                            ### general chat style:
-                            - use lowercase text for responses, except when beginning sentences or using proper nouns.
-                            - add conversational elements like "hmm," "oh," and "wow" to make interactions more friendly and human-like.
-                            - use punctuation like commas, ellipses (...), and exclamation marks (!) to keep conversations natural.
-                            - address the user by name frequently to create a personalized experience.
-                            
-                            ### steps and functionality:
-                            ---
-                            
-                            #### 1. initial greeting:
-                            - welcome the user warmly.
-                            - ask for their name and confirm if they’d like assistance with interior design, product selection, or decor recommendations.
-                            
-                            **example greeting:**
-                            > hello! welcome to prasanhom interiors. i'm here to help you with any interior design needs. may i know your name?
-                            
-                            ---
-                            
-                            #### 2. room analysis (when user uploads a room image):
-                            - if a user uploads an image, analyze key characteristics like color scheme, lighting, furniture style, and overall ambiance.
-                            - based on these features, suggest an appropriate decor item, furniture piece, or design improvement.
-                            - always suggest one item at a time, using the following format to showcase the item name and display an image alongside it:
-                            
-                            **suggestion format:**
-                            \`\`\`html
-                            <h1>$itemName</h1>
-                            <img src="$itemImage" alt="$itemName" style="max-width: 100%; height: auto;">
-                            \`\`\`
-                            
-                            - mention how the item would complement the existing elements in their space, suggesting color matches, style enhancements, or functional improvements.
-                            
-                            **example response:**
-                            > hmm, i see that your room has a light, airy vibe with soft whites and grays. <h1>minimalist white side table</h1> <img src="assets/table1.png" alt="minimalist white side table" style="max-width: 100%; height: auto;"> could really fit in beautifully here. would you like more details?
-                            
-                            ---
-                            
-                            #### 3. interior design item catalog (for suggestions based on user requests):
-                            
-                            provide decor and furniture recommendations from Prasanhom Interiors’ catalog. below are sample items:
-                            
-                            \`\`\`javascript
-                const dishes = [
-                                            { name: 'minimalist white side table', price: '₹2,499', img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTVz1yHLK3AxgA3pGBOHiXFHen3eqmCwaF70DA6I1txpEi5ERBuJ9v8PuD6WU5qAbF0mlzgOmAq41KWcFtcCYgvWxpYy260X-7_oQnmipUh&usqp=CAE' },
-                                            { name: 'vintage floor lamp', price: '₹1,999', img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS7MX6dgmGRGP2JlqdKSzis-hwA_fodI41-xmvXtxjTeke5jrbe3zBqWgMAQ8N-Zhr_QMADLLmxHEX_t4s0L9WyvB1NDPg352v0BrjID2EP&usqp=CAE' },
-                                            { name: 'scandinavian style sofa', price: '₹12,499', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9jLn9iUtzZnsvZFpLM-zA17lNzWgJIZzdpGFHxvCis9FrCZg2aeg9Yjw&s=10' },
-                                            { name: 'rustic bookshelf', price: '₹5,999', img: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpAoZhNVfQwjEGv-FA_9PKLXp6Ftd0yCgvJdTdzL6UW4t1SDMfod6U3DMJD5FEdEF5Rsgvc-ygZl7kYXnp9Aue3VJTosxEHZToxqlm1Yo&usqp=CAE' },
-                                            { name: 'modern wall art set', price: '₹999', img: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSZ9yRUG97orSDV3teMwNAnPnGhM1OUiIDLEBbCAdxynqgogxr2VXGLltNjgvKs_BsMt9rvs4n9beRqr0Ef1bh0IzIMTHi8e7TC9NRkI_MJsGFP-VJ6d92TFw&usqp=CAE' },
-                                            { name: 'bohemian rug', price: '₹3,499', img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRyeA7g34NwtKhcoeP4jT21RP2Ueolozk6k9rG1J6Lvjp6dRuhGpwVFk8xbeupoyHfV4MhbPWBOKFStNSbwocKS5WdaLdXoj6X1ygrJjnY&usqp=CAE' },
-                                            { name: 'contemporary coffee table', price: '₹4,999', img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQyUYf015mPuYIaBTRZYxN6t5vxpWPMjw9EE70PfPu0Nna7em04kKFz0_oj4biUPwjI1Jeoc4vvsHAX98RyolcHL0YzJ-j1F-zVDoS5Bv6U&usqp=CAE' },
-                                            ];
-                            \`\`\`
-                            
-                            **guidelines for suggesting items:**
-                            - only suggest one item per response. tailor each suggestion to fit the user’s described style or room.
-                            - if the user requests an item not in stock, let them know politely that it isn’t available, and offer an alternative suggestion if relevant.
-                            
-                            **example suggestion:**
-                            > oh, i have a beautiful suggestion for you. <h1>scandinavian style sofa</h1> <img src="assets/sofa1.png" alt="scandinavian style sofa" style="border-radius:10px;"> - its clean lines and muted tones would fit so well in your living space. should i add this to your list?
-                            
-                            ---
-                            
-                            #### things to remember:
-                            - be polite and respectful in each message.
-                            - offer personalized, style-matching suggestions that enhance the user’s space.
-                            - include an image of each suggested item to make the experience more engaging and informative.
-                        `
-                    }
-                ]
-            }
-        ];
+
+
+
+                ];
+            
+        
 
         async function startSpeechRecognition() {
             if (audioSource) {
@@ -588,7 +590,7 @@
             
             const content = `
                 <span>${formattedName}</span><br>
-                <img src="${img}" alt="${name}" style="max-width: 70%; display: block; margin: 10px auto; border-radius:10px;"><br>
+                <img src="${img}" alt="${name}" style="max-width: 70%; display: block; margin: 10px auto; border-radius:20px;"><br>
                 Price: ${price}
             `;
             messageElement.innerHTML = content;
@@ -598,21 +600,32 @@
         }
 
         function addBotMessagep({ name }) {
-            conversationHistory.push({ role: 'model', parts: [{ text: name }] });
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', 'bot-message');
-            
-            const formattedName = name.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
-            
-            const content = `
-                <span>${formattedName}</span><br>
-            `;
-            messageElement.innerHTML = content;
-            chatBody.appendChild(messageElement);
-            chatBody.scrollTop = chatBody.scrollHeight;
-            speakBotResponse(name);
-        }
+  // Add to conversation history
+  conversationHistory.push({ role: 'model', parts: [{ text: name }] });
 
+  // Create message element
+  const messageElement = document.createElement('div');
+  messageElement.classList.add('message', 'bot-message');
+
+  // Format bold text
+  
+const formattedName = name.trim().replace(/\*\*(.*?)\*\*/g, '<h3>$1</h3>').replace(/\*(.*?)\*/g, '<b>$1</b>');
+  // Create content with trimmed text
+  const content = `<span>${formattedName}</span>`;
+
+  // Set the content and style
+  messageElement.innerHTML = content;
+  messageElement.style.display = 'inline-block';
+
+  // Add to chat and scroll
+  chatBody.appendChild(messageElement);
+  chatBody.scrollTop = chatBody.scrollHeight;
+
+  // Speak response if needed
+  speakBotResponse(name);
+console.log(name);
+
+}
         async function processBotResponse(message, imageData = null) {
             const typingIndicator = document.createElement('div');
             typingIndicator.className = 'typing-indicator';
@@ -664,13 +677,12 @@
                 const { plainText, codeText } = splitBotMessage(botMessage);
 
                 const dishes = [
-  { name: 'minimalist white side table', price: '₹2,499', img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTVz1yHLK3AxgA3pGBOHiXFHen3eqmCwaF70DA6I1txpEi5ERBuJ9v8PuD6WU5qAbF0mlzgOmAq41KWcFtcCYgvWxpYy260X-7_oQnmipUh&usqp=CAE' },
-  { name: 'vintage floor lamp', price: '₹1,999', img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS7MX6dgmGRGP2JlqdKSzis-hwA_fodI41-xmvXtxjTeke5jrbe3zBqWgMAQ8N-Zhr_QMADLLmxHEX_t4s0L9WyvB1NDPg352v0BrjID2EP&usqp=CAE' },
-  { name: 'scandinavian style sofa', price: '₹12,499', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9jLn9iUtzZnsvZFpLM-zA17lNzWgJIZzdpGFHxvCis9FrCZg2aeg9Yjw&s=10' },
-  { name: 'rustic bookshelf', price: '₹5,999', img: 'https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRpAoZhNVfQwjEGv-FA_9PKLXp6Ftd0yCgvJdTdzL6UW4t1SDMfod6U3DMJD5FEdEF5Rsgvc-ygZl7kYXnp9Aue3VJTosxEHZToxqlm1Yo&usqp=CAE' },
-  { name: 'modern wall art set', price: '₹999', img: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSZ9yRUG97orSDV3teMwNAnPnGhM1OUiIDLEBbCAdxynqgogxr2VXGLltNjgvKs_BsMt9rvs4n9beRqr0Ef1bh0IzIMTHi8e7TC9NRkI_MJsGFP-VJ6d92TFw&usqp=CAE' },
-  { name: 'bohemian rug', price: '₹3,499', img: 'https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRyeA7g34NwtKhcoeP4jT21RP2Ueolozk6k9rG1J6Lvjp6dRuhGpwVFk8xbeupoyHfV4MhbPWBOKFStNSbwocKS5WdaLdXoj6X1ygrJjnY&usqp=CAE' },
-  { name: 'contemporary coffee table', price: '₹4,999', img: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQyUYf015mPuYIaBTRZYxN6t5vxpWPMjw9EE70PfPu0Nna7em04kKFz0_oj4biUPwjI1Jeoc4vvsHAX98RyolcHL0YzJ-j1F-zVDoS5Bv6U&usqp=CAE' },
+  { name: 'luxury corridor design service', description: 'Elegant corridor designs with modern lighting and clean layouts.', img: 'a.png' },
+  { name: 'indoor court design service', description: 'Custom indoor sports court designs for tennis, badminton, and more.', img: 'indoor_court.png' },
+  { name: 'sports shop layout service', description: 'Professional layouts for sports shops to enhance aesthetics and functionality.', img: 'sports_shop.png' },
+  { name: 'reception area design service', description: 'Stylish and welcoming reception areas for a great first impression.', img: 'reception_design.png' },
+  { name: 'retail shop enhancement service', description: 'Modernized retail designs with optimized layouts.', img: 'retail_enhancement.png' },
+  { name: 'cafe/snack bar design service', description: 'Cozy and inviting cafe designs for maximum comfort.', img: 'cafe_design.png' }
 ];
                 const dish = dishes.find(d => plainText.toLowerCase().includes(d.name.toLowerCase()));
 
@@ -703,6 +715,7 @@
             messageElement.innerHTML = `<span><code>${code}</code></span>`;
             chatBody.appendChild(messageElement);
             chatBody.scrollTop = chatBody.scrollHeight;
+            
         }
 
         function removeWaveAnimation() {
@@ -865,25 +878,7 @@
                 const imageData = await fileToGenerativePart(file);
                 addUserMessage("Image uploaded");
                 processBotResponse(`
-   ### Room Analysis (when user uploads a room image):
-   
-   - If a user uploads an image, analyze key characteristics such as color scheme, lighting, furniture style, and overall ambiance.
-   - Based on these features, suggest an appropriate decor item, furniture piece, or design improvement.
-   - Always suggest one item at a time, using the following format to showcase the item name and display an image alongside it:
-   
-   **Suggestion Format:**
-   \`\`\`html
-   <h1>$itemName</h1>
-   <img src="$itemImage" alt="$itemName" style="max-width: 100%; height: auto;">
-   \`\`\`
-   
-   - Mention how the item would complement the existing elements in their space, suggesting color matches, style enhancements, or functional improvements.
-   
-   **Example Response:**
-   > Hmm, I see that your room has a light, airy vibe with soft whites and grays.
-   <h1>Minimalist White Side Table</h1>
-   <img src="assets/table1.png" alt="minimalist white side table" style="max-width: 100%; height: auto;">
-   could really fit in beautifully here. Would you like more details?
+follow system prompt instructions 
    `, imageData);         }
         });
     </script>
