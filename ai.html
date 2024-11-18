@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -472,13 +472,42 @@
             provide concise recommendations from the following service catalog:
 
             \`\`\`javascript
-const services = [
-    { name: 'luxury corridor design service', description: 'Elegant corridor designs with modern lighting and clean layouts.', img: 'a.png' },
-    { name: 'indoor court design service', description: 'Custom indoor sports court designs for tennis, badminton, and more.', img: 'indoor_court.png' },
-    { name: 'sports shop layout service', description: 'Professional layouts for sports shops to enhance aesthetics and functionality.', img: 'sports_shop.png' },
-    { name: 'reception area design service', description: 'Stylish and welcoming reception areas for a great first impression.', img: 'reception_design.png' },
-    { name: 'retail shop enhancement service', description: 'Modernized retail designs with optimized layouts.', img: 'retail_enhancement.png' },
-    { name: 'cafe/snack bar design service', description: 'Cozy and inviting cafe designs for maximum comfort.', img: 'cafe_design.png' }
+const dishes = [
+{
+name: 'Reception/Retail Area Design Service',
+description: 'This is a modern sports retail space featuring:\n- A striking geometric reception desk with wood and white finishes\n- An elegant arched wall feature with "BANANA SPORTS" branding\n- Built-in shelving with sports equipment and apparel\n- Clean white tile flooring\n- Contemporary track lighting and recessed spots\n- A sophisticated gray concrete-effect wall finish\nMain service: Retail Interior Design with brand identity integration',
+img: 'a.png'
+},
+{
+name: 'Cafe/Dining Area Design Service',
+description: 'The space showcases:\n- Exposed whitewashed brick walls adding industrial charm\n- Modern dining furniture with black Eames-style chairs\n- Wooden tables with metal frames\n- A sleek white counter/bar area\n- Contemporary motivational artwork on walls\n- Cold drinks storage unit\nMain service: Commercial Hospitality Design with industrial-modern aesthetics',
+img: 'cafe_design.png'
+},
+{
+name: 'Indoor Sports Court Design Service',
+description: 'Features include:\n- Professional-grade indoor tennis/sports court\n- Blue court surface with precise line markings\n- Dramatic lighting design with multiple recessed lights\n- Clean white walls maximizing brightness\n- Professional-grade sports flooring\nMain service: Sports Facility Interior Design with professional specifications',
+img: 'indoor_court.png'
+},
+{
+name: 'Custom Display Wall Design Service',
+description: 'Highlights include:\n- Creative hexagonal wooden display units\n- Integrated lighting in display shelves\n- Mixed display of sports shoes and equipment\n- Brand logo wall feature\n- Modern minimalist design approach\nMain service: Custom Display Solution Design with creative storage solutions',
+img: 'file-XEUYFe5H8kd593rVsOrJ4bMC'
+},
+{
+name: 'Equipment Storage Design Service',
+description: 'Features:\n- Built-in gray concrete-finish storage units\n- Wood-backed display niches\n- Sports equipment organization system\n- Decorative copper/bronze athlete wall art\n- Track lighting for focused illumination\nMain service: Sports Equipment Storage Design with aesthetic functionality',
+img: 'file-ZCGo8yT4oJm4f9W3J9GJzTFh'
+},
+{
+name: 'Luxury Corridor Design Service',
+description: 'This service transforms long spaces into captivating luxury corridors with:\n- Spotless glossy white tiled floors\n- Glass-panel walls offering visual connectivity\n- Recessed spotlights for a clean, even lighting effect\n- Dark wooden doors providing contrast\n- Modern minimalistic design elements\nMain service: Corridor Design with luxury aesthetics',
+img: 'luxury_corridor.png'
+},
+{
+name: 'Sports Shop Layout Design Service',
+description: 'Create attractive and efficient sports shops with:\n- Optimized layouts for easy navigation\n- Organized display units for merchandise\n- Stylish modern shelving systems\n- Lighting enhancements for focused product highlights\n- Aesthetic appeal to improve customer experience\nMain service: Sports Shop Interior Design with functional aesthetics',
+img: 'sports_shop.png'
+}
 ];
             \`\`\`
 
@@ -676,13 +705,42 @@ console.log(name);
 
                 const { plainText, codeText } = splitBotMessage(botMessage);
 
-                const dishes = [
-  { name: 'luxury corridor design service', description: 'Elegant corridor designs with modern lighting and clean layouts.', img: 'a.png' },
-  { name: 'indoor court design service', description: 'Custom indoor sports court designs for tennis, badminton, and more.', img: 'indoor_court.png' },
-  { name: 'sports shop layout service', description: 'Professional layouts for sports shops to enhance aesthetics and functionality.', img: 'sports_shop.png' },
-  { name: 'reception area design service', description: 'Stylish and welcoming reception areas for a great first impression.', img: 'reception_design.png' },
-  { name: 'retail shop enhancement service', description: 'Modernized retail designs with optimized layouts.', img: 'retail_enhancement.png' },
-  { name: 'cafe/snack bar design service', description: 'Cozy and inviting cafe designs for maximum comfort.', img: 'cafe_design.png' }
+const dishes = [
+  {
+    name: 'Reception/Retail Area Design Service',
+    description: 'This is a modern sports retail space featuring:\n- A striking geometric reception desk with wood and white finishes\n- An elegant arched wall feature with "BANANA SPORTS" branding\n- Built-in shelving with sports equipment and apparel\n- Clean white tile flooring\n- Contemporary track lighting and recessed spots\n- A sophisticated gray concrete-effect wall finish\nMain service: Retail Interior Design with brand identity integration',
+    img: 'a.png'
+    },
+  {
+    name: 'Cafe/Dining Area Design Service',
+    description: 'The space showcases:\n- Exposed whitewashed brick walls adding industrial charm\n- Modern dining furniture with black Eames-style chairs\n- Wooden tables with metal frames\n- A sleek white counter/bar area\n- Contemporary motivational artwork on walls\n- Cold drinks storage unit\nMain service: Commercial Hospitality Design with industrial-modern aesthetics',
+    img: 'cafe_design.png'
+    },
+  {
+    name: 'Indoor Sports Court Design Service',
+    description: 'Features include:\n- Professional-grade indoor tennis/sports court\n- Blue court surface with precise line markings\n- Dramatic lighting design with multiple recessed lights\n- Clean white walls maximizing brightness\n- Professional-grade sports flooring\nMain service: Sports Facility Interior Design with professional specifications',
+    img: 'indoor_court.png'
+    },
+  {
+    name: 'Custom Display Wall Design Service',
+    description: 'Highlights include:\n- Creative hexagonal wooden display units\n- Integrated lighting in display shelves\n- Mixed display of sports shoes and equipment\n- Brand logo wall feature\n- Modern minimalist design approach\nMain service: Custom Display Solution Design with creative storage solutions',
+    img: 'file-XEUYFe5H8kd593rVsOrJ4bMC'
+    },
+  {
+    name: 'Equipment Storage Design Service',
+    description: 'Features:\n- Built-in gray concrete-finish storage units\n- Wood-backed display niches\n- Sports equipment organization system\n- Decorative copper/bronze athlete wall art\n- Track lighting for focused illumination\nMain service: Sports Equipment Storage Design with aesthetic functionality',
+    img: 'file-ZCGo8yT4oJm4f9W3J9GJzTFh'
+    },
+  {
+    name: 'Luxury Corridor Design Service',
+    description: 'This service transforms long spaces into captivating luxury corridors with:\n- Spotless glossy white tiled floors\n- Glass-panel walls offering visual connectivity\n- Recessed spotlights for a clean, even lighting effect\n- Dark wooden doors providing contrast\n- Modern minimalistic design elements\nMain service: Corridor Design with luxury aesthetics',
+    img: 'luxury_corridor.png'
+    },
+  {
+    name: 'Sports Shop Layout Design Service',
+    description: 'Create attractive and efficient sports shops with:\n- Optimized layouts for easy navigation\n- Organized display units for merchandise\n- Stylish modern shelving systems\n- Lighting enhancements for focused product highlights\n- Aesthetic appeal to improve customer experience\nMain service: Sports Shop Interior Design with functional aesthetics',
+    img: 'sports_shop.png'
+    }
 ];
                 const dish = dishes.find(d => plainText.toLowerCase().includes(d.name.toLowerCase()));
 
