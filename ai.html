@@ -476,7 +476,7 @@ const dishes = [
 {
 name: 'Reception/Retail Area Design Service',
 description: 'This is a modern sports retail space featuring:\n- A striking geometric reception desk with wood and white finishes\n- An elegant arched wall feature with "BANANA SPORTS" branding\n- Built-in shelving with sports equipment and apparel\n- Clean white tile flooring\n- Contemporary track lighting and recessed spots\n- A sophisticated gray concrete-effect wall finish\nMain service: Retail Interior Design with brand identity integration',
-img: 'a.png'
+img: 'reception.png'
 },
 {
 name: 'Cafe/Dining Area Design Service',
@@ -491,12 +491,12 @@ img: 'indoor_court.png'
 {
 name: 'Custom Display Wall Design Service',
 description: 'Highlights include:\n- Creative hexagonal wooden display units\n- Integrated lighting in display shelves\n- Mixed display of sports shoes and equipment\n- Brand logo wall feature\n- Modern minimalist design approach\nMain service: Custom Display Solution Design with creative storage solutions',
-img: 'file-XEUYFe5H8kd593rVsOrJ4bMC'
+img: 'reception.png'
 },
 {
 name: 'Equipment Storage Design Service',
 description: 'Features:\n- Built-in gray concrete-finish storage units\n- Wood-backed display niches\n- Sports equipment organization system\n- Decorative copper/bronze athlete wall art\n- Track lighting for focused illumination\nMain service: Sports Equipment Storage Design with aesthetic functionality',
-img: 'file-ZCGo8yT4oJm4f9W3J9GJzTFh'
+img: 'storage.png'
 },
 {
 name: 'Luxury Corridor Design Service',
@@ -528,6 +528,31 @@ img: 'sports_shop.png'
             -when user asks for catalog add images for all the services in the catalog 
             -dont ask lots of questions suggest Better 
             -And don't say you cant display images , You are programmed externally via function calling to display images so you can just add the code snippet rest the function handles 
+            -ask for user to upload image of his area/space to get good recommendation if possible for user to upload 
+            
+            
+            catalog 
+            
+            
+            whenever asked for catalog it should be with the with conse short description of each and image code 
+            
+            example as like below 
+            catalog 
+            3.
+            Indoor Sports Court Design Service:
+            Design and build a professional-grade indoor sports court with high-quality flooring and dramatic lighting. Ideal for sports facilities.
+             <img src="indoor-sports.png" alt="sports design service" style="max-width: 100%; height: auto;">
+            
+            4.
+            Custom Display Wall Design Service:
+            Create a visually appealing and functional display wall with hexagonal wooden units and integrated lighting. Perfect for showcasing products.
+             <img src="wall.png" alt="luxury wall design service" style="max-width: 100%; height: auto;">
+            
+            
+            and please remember to always include image whenever referring to the service include image of that referring service even when selected from catalog 
+                        **example response:**
+                        > hmm, your space has a modern vibe. <h1>luxury corridor design service</h1> <img src="luxury_corridor.png" alt="luxury corridor design service" style="max-width: 100%; height: auto;"> - this can elevate the elegance of your hallway. would you like more details?
+            
 
 `});
 
@@ -709,38 +734,38 @@ const dishes = [
   {
     name: 'Reception/Retail Area Design Service',
     description: 'This is a modern sports retail space featuring:\n- A striking geometric reception desk with wood and white finishes\n- An elegant arched wall feature with "BANANA SPORTS" branding\n- Built-in shelving with sports equipment and apparel\n- Clean white tile flooring\n- Contemporary track lighting and recessed spots\n- A sophisticated gray concrete-effect wall finish\nMain service: Retail Interior Design with brand identity integration',
-    img: 'a.png'
-    },
+    img: 'reception.png'
+},
   {
     name: 'Cafe/Dining Area Design Service',
     description: 'The space showcases:\n- Exposed whitewashed brick walls adding industrial charm\n- Modern dining furniture with black Eames-style chairs\n- Wooden tables with metal frames\n- A sleek white counter/bar area\n- Contemporary motivational artwork on walls\n- Cold drinks storage unit\nMain service: Commercial Hospitality Design with industrial-modern aesthetics',
     img: 'cafe_design.png'
-    },
+},
   {
     name: 'Indoor Sports Court Design Service',
     description: 'Features include:\n- Professional-grade indoor tennis/sports court\n- Blue court surface with precise line markings\n- Dramatic lighting design with multiple recessed lights\n- Clean white walls maximizing brightness\n- Professional-grade sports flooring\nMain service: Sports Facility Interior Design with professional specifications',
     img: 'indoor_court.png'
-    },
+},
   {
     name: 'Custom Display Wall Design Service',
     description: 'Highlights include:\n- Creative hexagonal wooden display units\n- Integrated lighting in display shelves\n- Mixed display of sports shoes and equipment\n- Brand logo wall feature\n- Modern minimalist design approach\nMain service: Custom Display Solution Design with creative storage solutions',
-    img: 'file-XEUYFe5H8kd593rVsOrJ4bMC'
-    },
+    img: 'reception.png'
+},
   {
     name: 'Equipment Storage Design Service',
     description: 'Features:\n- Built-in gray concrete-finish storage units\n- Wood-backed display niches\n- Sports equipment organization system\n- Decorative copper/bronze athlete wall art\n- Track lighting for focused illumination\nMain service: Sports Equipment Storage Design with aesthetic functionality',
-    img: 'file-ZCGo8yT4oJm4f9W3J9GJzTFh'
-    },
+    img: 'storage.png'
+},
   {
     name: 'Luxury Corridor Design Service',
     description: 'This service transforms long spaces into captivating luxury corridors with:\n- Spotless glossy white tiled floors\n- Glass-panel walls offering visual connectivity\n- Recessed spotlights for a clean, even lighting effect\n- Dark wooden doors providing contrast\n- Modern minimalistic design elements\nMain service: Corridor Design with luxury aesthetics',
     img: 'luxury_corridor.png'
-    },
+},
   {
     name: 'Sports Shop Layout Design Service',
     description: 'Create attractive and efficient sports shops with:\n- Optimized layouts for easy navigation\n- Organized display units for merchandise\n- Stylish modern shelving systems\n- Lighting enhancements for focused product highlights\n- Aesthetic appeal to improve customer experience\nMain service: Sports Shop Interior Design with functional aesthetics',
     img: 'sports_shop.png'
-    }
+}
 ];
                 const dish = dishes.find(d => plainText.toLowerCase().includes(d.name.toLowerCase()));
 
