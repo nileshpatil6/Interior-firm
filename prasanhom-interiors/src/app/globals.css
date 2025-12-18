@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+/* Custom theme configuration for Tailwind v4 */
+@theme {
+  /* Colors */
+  --color-background: #F5F2EB;
+  --color-foreground: #1A1A1A;
+
+  /* Terracotta palette */
+  --color-terracotta-50: #fdf8f6;
+  --color-terracotta-100: #f2e8e5;
+  --color-terracotta-200: #eaddd7;
+  --color-terracotta-300: #e0cec7;
+  --color-terracotta-400: #d2bab0;
+  --color-terracotta-500: #C16039;
+  --color-terracotta-600: #a34d2b;
+  --color-terracotta-700: #863b1f;
+  --color-terracotta-800: #6a2c16;
+  --color-terracotta-900: #50200f;
+
+  /* Sand palette */
+  --color-sand-50: #f9f8f6;
+  --color-sand-100: #f5f2eb;
+  --color-sand-200: #ebe5d9;
+  --color-sand-300: #e0d8c6;
+  --color-sand-400: #d2c6b0;
+  --color-sand-500: #c1b398;
+  --color-sand-600: #a3967d;
+  --color-sand-700: #867b64;
+  --color-sand-800: #6a614e;
+  --color-sand-900: #504a3b;
+
+  /* Charcoal */
+  --color-charcoal: #1A1A1A;
+
+  /* Font families */
+  --font-serif: var(--font-playfair), serif;
+  --font-sans: var(--font-inter), sans-serif;
+}
+
+:root {
+  --background: #F5F2EB;
+  /* sand-100 */
+  --foreground: #1A1A1A;
+  /* charcoal */
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-playfair);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C16039;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a34d2b;
+}
+
+/* Utility Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Hide scrollbar for clean horizontal scrolls */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
